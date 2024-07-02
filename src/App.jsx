@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API_KEY = '46c7619f12e41f8b0176f1e9999b9a39'; // Replace with your actual TMDB API key
-const BASE_URL = 'https://api.themoviedb.org/3';
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500'; // Base URL for movie images
+const API_KEY = import.meta.env.VITE_API_KEY; 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL; 
 
 
 const MovieList = () => {
