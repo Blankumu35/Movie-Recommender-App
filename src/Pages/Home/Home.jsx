@@ -25,6 +25,7 @@ const MovieList = () => {
             page: page
           }
         });
+        console.log(response.data.results)
         setMovies(response.data.results);
         setTotalPages(response.data.total_pages);
       } catch (error) {
