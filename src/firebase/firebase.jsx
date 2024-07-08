@@ -5,7 +5,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDFMO_TBwz9dkQgPhnmAphpGtnijKuZgmI",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "movie-recommender-a4dae.firebaseapp.com",
   projectId: "movie-recommender-a4dae",
   storageBucket: "movie-recommender-a4dae.appspot.com",

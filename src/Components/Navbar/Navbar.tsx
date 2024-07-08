@@ -56,9 +56,13 @@ const Navbar = () => {
                             <FaUser />
                         </div>
                         {dropdownOpen && (
-                            <div className='dropdown-menu'>
-                                <p>{user.email}</p>
-                                <button onClick={logout}>Log Out</button>
+                            <div className="relative inline-block">
+                                <div className="absolute top-7 -right-16 w-40 bg-white shadow-lg z-10 p-4 text-center">
+                                    <p className="mb-2 text-black">{user.displayName}</p>
+                                    <button className="w-full py-2 mt-2 bg-blue-500 text-white hover:bg-blue-700 border-none cursor-pointer">
+                                        Log out
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </li>
