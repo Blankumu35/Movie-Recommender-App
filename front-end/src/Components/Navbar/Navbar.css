@@ -1,0 +1,65 @@
+.name-text{
+  -webkit-text-stroke:rgb(255, 157, 0) 2px;
+  background:linear-gradient(red,rgb(141, 4, 4),red);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size: 40px;
+  font-family: "Goblin One";
+  filter: drop-shadow(0 0px 20px rgb(255, 157, 0));
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0);
+    color: #fff;
+    padding: 0.6rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.nav-links li {
+    margin-right: 3rem;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links li a:hover {
+    color: #1ed70d;
+    text-decoration: none;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    color: #1ed70d;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-right: 3rem;
+}
+
+.nav-brand-img {
+    display: flex;
+    height: 50px;
+    width: 100px;
+}
+.user-icon{
+    margin-bottom: 0px ;
+    cursor: pointer;
+}
