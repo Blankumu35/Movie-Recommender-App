@@ -111,3 +111,138 @@
 }
 
 
+/* details page*/
+
+.main-overview{
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+}
+.backdrop-image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+  justify-content: flex-start;
+  display: flex;
+}
+
+.backdrop-image-overshadow{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100vw;
+  height: 100vh;
+  z-index: -1;
+  background-image: linear-gradient(to right, rgba(220.5, 241.5, 241.5, 1) calc((50vw - 170px) - 340px), rgba(220.5, 241.5, 241.5, 0.84) 50%, rgba(220.5, 241.5, 241.5, 0.54) 100%);
+  overflow: hidden;
+
+}
+
+
+.media-overview{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+.media-mini-details {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+.media-mini-details ul{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  
+}
+.media-mini-details ul li{
+  list-style:disc;  
+}
+.media-mini-details ul li::marker {
+  color: rgb(34, 8, 96);
+}
+
+
+
+.rating{
+  margin-bottom: 25px;
+}
+
+
+/* ------------- */
+
+.CircularProgressbar-path {
+  stroke: red;
+}
+.CircularProgressbar-trail {
+  stroke: gray;
+}
+.CircularProgressbar-text {
+  fill: yellow;
+}
+.CircularProgressbar-background {
+  fill: green;
+}
+
+/*  modal for Actor overview */
+.overview {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Read More button styling */
+.read-more-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: rgb(36, 35, 35);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1200px;
+  width: 100%;
+  text-align: start;
+  position: relative;
+}
+
+.close-modal {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.close-modal:hover{
+  background-color: #711821;
+}
+

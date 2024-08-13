@@ -1,55 +1,75 @@
 import React, { useEffect, useState } from 'react';
-import { db, auth } from '../../firebase/firebase'; // Adjust the import path accordingly
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
+
 
 const Watchlist = () => {
   const [watchlist, setWatchlist] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState('null');
 
-  useEffect(() => {
-    const fetchWatchlist = async () => {
-      setLoading(true);
-      setError('');
-      try {
-        const user = auth.currentUser;
-        if (user) {
-          const watchlistRef = db.collection('watchlists').doc(user.uid);
-          const watchlistDoc = await watchlistRef.get();
-          if (watchlistDoc.exists) {
-            setWatchlist(watchlistDoc.data().items); // Adjust based on Firestore structure
-          } else {
-            console.log('No watchlist found');
-          }
-        } else {
-          console.log('User is not logged in');
+    const currentUser =  localStorage.getItem('ID');
+
+
+ useEffect(() => {
+    const fetchBookmarkedItems = async () => {
+      if (currentUser) {
+        try {
+        const response = await axios.get(`http://localhost:5000/bookmarked-items/${currentUser}`);
+          console.log((response.data.bookmarkedItems))
+          setWatchlist((response.data.bookmarkedItems));
+        } catch (error) {
+          console.error('Error fetching liked items:', error);
+          setError('Error')
+
         }
-      } catch (error) {
-        console.error('Error fetching watchlist:', error);
-        setError('Failed to fetch watchlist.');
-      } finally {
-        setLoading(false);
       }
     };
 
-    fetchWatchlist();
+    fetchBookmarkedItems();
+    setLoading(false)
   }, []);
+
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+ 
 
   return (
-    <div>
+    <div className='flex-start'>
       <h1>Your Watchlist</h1>
-      <ul>
-        {watchlist.map((item, index) => (
-          <li key={index}>{item.title}</li> // Adjust this based on your Firestore structure
-        ))}
-      </ul>
+     <div className="flex flex-wrap justify-start gap-4 p-4">
+  {watchlist.map((item) => (
+    <div
+      key={item.itemId.id}
+      className="w-48 text-center bg-white shadow-md rounded-lg transform hover:scale-105 transition-transform duration-200 ease-in-out"
+    >
+      <Link
+        to={`/${item.itemType}/${item.itemId.id}`}
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        <img
+          src={`${IMAGE_BASE_URL}/${item.itemId.poster_path}`}
+          alt={item.itemType}
+          className="w-48 h-60 object-cover rounded-t-lg"
+        />
+        <div className="p-2">
+          <p className="text-sm font-semibold text-gray-800">
+            {item.itemId.title}
+          </p>
+          <p className="text-xs text-gray-600">
+            {item.itemType === 'movie' ? 'Movie' : 'TV Show'}
+          </p>
+        </div>
+      </Link>
+    </div>
+  ))}
+</div>
     </div>
   );
 };

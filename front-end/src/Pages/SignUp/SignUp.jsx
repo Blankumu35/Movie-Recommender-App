@@ -34,34 +34,30 @@ const SignUpPage = () => {
     };
 
     const register = async (e) => {
-        e.preventDefault();
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            const profilePicColor = generateRandomColor();
-            await setDoc(doc(db, 'users', user.uid), {
-                firstName,
-                lastName,
-                email,
-                profilePicColor,
-                signInMethod: 'email'
-            });
-                
-            await axios.post('http://localhost:5000/auth/signup', {
-                userId: user.uid,
-                firstName,
-                lastName,
-                email,
-                photoURL: user.photoURL || '',
-                profilePicColor,
-                signInMethod: 'email'
-            });
-
-            navigate('/');
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
+    e.preventDefault();
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        const profilePicColor = generateRandomColor();
+        
+        await axios.post('http://localhost:5000/auth/signup', {
+            userId: user.uid,
+            firstName,
+            lastName,
+            email,
+            password: password,  
+            photoURL: user.photoURL || '',
+            profilePicColor,
+            signInMethod: 'email'
+        });
+        const userId = response.data.userId; 
+        console.log(userId)
+        localStorage.setItem('ID', userId); 
+        navigate('/');
+    } catch (error) {
+        console.log(error.message);
+    }
+};
 
     return (
         <div className='wrapper'>

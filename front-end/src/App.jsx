@@ -10,9 +10,10 @@ import ShowDetails from './Pages/Details/ShowDetails';
 import ActorDetails from './Pages/Details/ActorDetails';
 import LoginPage from './Pages/Login/Login';
 import SignUpPage from './Pages/SignUp/SignUp';
+import SearchResults from './Pages/SearchResult/SearchResults';
 import Watchlist from './Pages/Watchlist/Watchlist';
 import LikedItems from './Pages/Likes/Likes';
-import ProtectedRoute from './utils/ProtectedRoute/ProtectedRoute'; // Adjust the import path accordingly
+import ProtectedRoute from './utils/ProtectedRoute/ProtectedRoute'; 
 
 const App = () => {
   return (
@@ -23,12 +24,13 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
-          <Route path="/show/:id" element={<ShowDetails />} />
-          <Route path="/actor/:id" element={<ActorDetails />} />
+          <Route path="/tv/:id" element={<ShowDetails />} />
+          <Route path="/person/:id" element={<ActorDetails />} />
           <Route path="/movies" element={<MovieList />} />  
           <Route path="/tvshows" element={<ShowList />} />                
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/signUp" element={<SignUpPage />} /> 
+          <Route path="/search" element={<SearchResults />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path='/likedItems' element={<LikedItems />} />

@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 
 // User signup route
-router.post('/signup', async (req, res) => {
+const authRouter = router.post('/signup', async (req, res) => {
   const { userId, firstName, lastName, email, photoURL, profilePicColor, signInMethod } = req.body;
 
   try {
@@ -21,4 +21,4 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = authRouter;

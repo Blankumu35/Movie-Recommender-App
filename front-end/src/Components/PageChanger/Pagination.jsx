@@ -11,6 +11,7 @@ const CustomPagination = ({ currentPage, totalPages, handlePageChange }) => {
         onChange={(event, value) => handlePageChange(value)} 
         size='large'
         color="primary" 
+        variant="outlined"
       />
     </Stack>
   );

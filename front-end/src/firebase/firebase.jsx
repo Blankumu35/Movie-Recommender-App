@@ -25,19 +25,12 @@ export { auth, db, createUserWithEmailAndPassword };
 
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle= () => {
-  signInWithPopup(auth, provider).then((result) => {
+export const signInWithGoogle= async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
     console.log(result)
-    const name = result.user.displayName
-    const email = result.user.email
-    const profilePic = result.user.photoURL
-
-    localStorage.item("name", name)
-    localStorage.item("email", email)
-    localStorage.item("profile Picture", profilePic)
- 
-
-  }).catch((error) => {
+    return result;  // Return the result so it can be accessed by the calling code
+  }catch(error) {
     console.log(error)
-  })
+  }
 }

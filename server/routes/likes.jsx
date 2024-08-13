@@ -1,9 +1,9 @@
 const express = require('express');
-const router = express.Router();
+const likesRouter = express.Router();
 const User = require('../models/User');
 
 // Like route
-router.post('/', async (req, res) => {
+likesRouter.post('/', async (req, res) => {
   const { userId, itemId, itemType } = req.body;
 
   try {
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 });
 
 // Get liked items route
-router.get('/liked-items/:userId', async (req, res) => {
+likesRouter.get('/liked-items/:userId', async (req, res) => {
   try {
     const user = await User.findOne({ userId: req.params.userId });
     res.send(user ? user.likedItems : []);
@@ -36,4 +36,4 @@ router.get('/liked-items/:userId', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = likesRouter;
