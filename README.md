@@ -5,11 +5,12 @@ from TMDB and this will take some time, since I can't just download a file with 
 
 Like movies, tv shows or people and the app will recommend you moives and tv shows by using content-based filtering 
 
-A Preview of the project:
+A Preview of the project
+
+![Screenshot (166)](https://github.com/user-attachments/assets/9927798e-97a7-426d-9a86-8fbfa47237b7)
 ![Screenshot (169)](https://github.com/user-attachments/assets/686b1f84-469d-4076-a40a-3ed5555cdd75)
 ![Screenshot (168)](https://github.com/user-attachments/assets/eee54fdd-c030-43c0-93c6-30e22467acff)
 ![Screenshot (167)](https://github.com/user-attachments/assets/566c2b3f-a827-4741-9c51-a326a9f20987)
-![Screenshot (166)](https://github.com/user-attachments/assets/9927798e-97a7-426d-9a86-8fbfa47237b7)
 ![Screenshot (165)](https://github.com/user-attachments/assets/e3ddf277-1647-4646-8886-e8a5d937b3b1)
 ![Screenshot (171)](https://github.com/user-attachments/assets/9269b335-f546-499b-bfc0-cb68c81ab900)
 ![Screenshot (170)](https://github.com/user-attachments/assets/06a7f10a-768f-49f2-a80a-5ceeac3e0efd)
