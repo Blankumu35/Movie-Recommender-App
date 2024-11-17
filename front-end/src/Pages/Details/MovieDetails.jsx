@@ -17,11 +17,13 @@ import { LiaClosedCaptioningSolid, LiaDoorClosedSolid, LiaGithub, LiaLinkedin, L
 import fakeImage from '../../assets/default-movie.png'
 import fakeMan from '../../assets/default-man.jpg';
 import fakeWoman from '../../assets/default-woman.jpg';
+import Rating from '../../Components/Rating/Rating';
 
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_BASE_URL;
+const BACKGROUND_IMAGE_BASE_URL = import.meta.env.VITE_BACKGROUND_IMAGE_BASE_URL;
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -174,24 +176,7 @@ const MovieDetails = () => {
     }
   };
 
-  const styling = { // Rotation of path and trail, in number of turns (0-1)
-
-    // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-    strokeLinecap: 'round',
-
-    // Text size
-    textSize: '27px',
-
-    // How long animation takes to go from one percentage to another, in seconds
-    pathTransitionDuration: 30,
-
-
-    // Colors
-    pathColor: `rgba(62, 152, 0)`,
-    textColor: '#f88',
-    trailColor: '#000000',
-    backgroundColor: '#000000',
-  }
+ 
 
   return (
     <div>
@@ -201,16 +186,17 @@ const MovieDetails = () => {
           <p style={{ display: 'flex', flexWrap: 'wrap', textAlign: 'center' }}>Loading...</p>
         </div>
       ) : details ? (
-        <div className='main-overview' style={{ margin: '20px', display:'flex', flexDirection:'column', height:'100%'}}>
-        <img src={`${IMAGE_BASE_URL}${details.backdrop_path}`} className='backdrop-image' />
+        <div className='main-overview' style={{ margin: '20px', display:'flex', flexDirection:'column', height:'100%', width:'100%'}}>
+        <img src={`${BACKGROUND_IMAGE_BASE_URL}${details.backdrop_path}`} className='backdrop-image' />
         <div className='backdrop-image-overshadow' />
-          <div className='media-overview items-center'>
+          <div className='media-overview items-center sm:flex-row'>
             <img 
               src={`${IMAGE_BASE_URL}${details.poster_path}`} 
               alt={details.title} 
+              className='order-1 sm:order-1'
               style={{ width: '300px', height: '450px', objectFit: 'cover', marginRight:10, borderRadius:8 , marginBottom:100}} 
             />
-          <div className='media-details mt-[0px], ml-[15px]' >
+          <div className='media-details mt-[0px] ml-[15px] order-2 sm:order2' >
             <h1 className='mb-2 text-start text-[#000] font-semibold'>{details.title}</h1>
            <div className='media-mini-details'>
             <ul className='ml-5 text-[#000]'>
@@ -230,16 +216,18 @@ const MovieDetails = () => {
             </ul>
             </div>
             <div className='w-20 h-20 text-[20px] mb-5'>
-            <CircularProgressbar value={`${Math.floor(details.vote_average * 10)}`} maxValue={100} text={`${Math.floor(details.vote_average * 10)}%`} background='true' backgroundPadding={5}  styles={buildStyles(`${styling}`)}/>
-            </div>
+            <Rating value={Math.floor(details.vote_average * 10)} maxValue={100} text={Math.floor(details.vote_average * 10)}  textSize='21px'
+                             pathColor='#00ff00' trailColor='#bbbfb' textColor='#fff' backgroundColor='#000000' backgroundPadding={4}  />
+              </div>
                  <div className='buttons flex mb-[25px] gap-[8px]'>
-                   <LikeButton id={details}  type="movie" className=':hover ' />
-                   <Bookmark id={details} type="movie" className=':hover ' />
+                   <LikeButton id={details}  type="movie" className=':hover' color={'red'} />
+                   <Bookmark id={details} type="movie" className=':hover ' color={'gold'}/>
                  {(trailer !== undefined) && (
                          <p className='flex gap-[5px] text-[30px] justify-center items-center cursor-pointer' onClick={() => setShowTrailer(true)}>
                            <LiaPlayCircle /> Play trailer
                          </p>  )}            
                  </div>
+                 
             <h2 className='text-[25px] text-start text-[#000] font-semibold'>Overview</h2>
             <p className='overview text-[15px] text-start text-[#000]/[0.9]'>{details.overview}</p>
             <div className='flex-row mt-10'>
@@ -288,7 +276,7 @@ const MovieDetails = () => {
             </div>
           )}
           <div>
-           <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+           <div style={{ width: '100%', marginTop: '50px', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
           <h1 style={{ textAlign: 'start', marginBottom: '20px', fontSize:25, marginLeft:25 }}>Cast</h1>
           <Carousel 
             responsive={responsive}

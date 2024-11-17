@@ -5,22 +5,17 @@ import Favorite from '@mui/icons-material/Favorite';
 import axios from 'axios';
 import { auth } from '../../firebase/firebase';
 
-const LikeButton = ({ id, type }) => {
+const LikeButton = ({ id, type, size, color, colorBorder }) => {
   const [liked, setLiked] = useState(false);
-   const [size, setSize] = useState('medium');
 
-  useEffect(() => {
-    // Example condition to determine the size
-    const handleSize = window.innerWidth < 600 ? 'small' : 'medium';
-    setSize(handleSize);
-  }, []);
-
+ 
 
   const userId = localStorage.getItem('ID');
+  
 
  useEffect(() => {
   const fetchIsLikedItem = async () => {
-            console.log(userId,id,type);
+          //  console.log(userId,id,type);
 
     if (userId) {
       try {
@@ -75,12 +70,14 @@ const LikeButton = ({ id, type }) => {
           }
         });
       }
-      
+            console.log(isChecked)
+
       // Update the state after the request completes
       setLiked(isChecked);
       console.log(liked)
     }
   } catch (error) {
+    alert("You need to sign in to like/bookmark a media")
     console.error('Error handling like/unlike:', error);
     // Optionally, revert the state if the request fails
     setLiked(!isChecked);
@@ -91,9 +88,9 @@ return (
   <Checkbox 
     checked={liked}
     onChange={handleLikeChange}
-    icon={<FavoriteBorder />} 
-    checkedIcon={<Favorite />} 
-    size='large'
+    icon={<FavoriteBorder style={{color: colorBorder ||''}}/>} 
+    checkedIcon={<Favorite style={{color: color || ''}}/>} 
+    size={size || 'large'}
   />
 )
 };

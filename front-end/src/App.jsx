@@ -11,6 +11,7 @@ import ActorDetails from './Pages/Details/ActorDetails';
 import LoginPage from './Pages/Login/Login';
 import SignUpPage from './Pages/SignUp/SignUp';
 import SearchResults from './Pages/SearchResult/SearchResults';
+import ForYou from './Pages/For-You/ForYou';
 import Watchlist from './Pages/Watchlist/Watchlist';
 import LikedItems from './Pages/Likes/Likes';
 import ProtectedRoute from './utils/ProtectedRoute/ProtectedRoute'; 
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/signUp" element={<SignUpPage />} /> 
           <Route path="/search" element={<SearchResults />} />
+          <Route path="/forYou" element={<ForYou />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path='/likedItems' element={<LikedItems />} />

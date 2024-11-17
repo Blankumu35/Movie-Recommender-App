@@ -1,15 +1,29 @@
 :root {
   max-width: 1280px;
-  margin-top: 100px;
+ margin-top: 100px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+
   background: linear-gradient(rgb(36, 12, 61), rgb(16, 4, 30),rgb(13, 3, 24) );
   color: aliceblue;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/*.page {
+  max-width: 1280px;
+  flex-direction: column;
+   margin-top: 200px;
+  margin: 0 auto;
+  padding: 4rem;
+
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+
 
 .navbar {
   position: fixed;
@@ -20,6 +34,8 @@
 
 .main-content {
   padding-top: 80px;
+   justify-content: center;
+  align-items: center;
 }
 
 .loader {
@@ -110,6 +126,81 @@
   cursor: pointer;
 }
 
+/* Custom styles to position dots on slider image */
+
+.slider-container {
+  width: 100vw;
+  overflow: hidden;
+  display: block;
+  height: 90vh;
+  
+}
+.slick-slider {
+  width: 100vw;
+  overflow: hidden;
+}
+.slick-track{
+  width: 100vw;
+  object-fit:cover ;
+}
+
+
+.slider-image {
+  width: 100vw; /* 100% of the viewport width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Cover the container while maintaining aspect ratio */
+}
+.slick-dots {
+  position: absolute;
+  bottom: 0px; /* Adjust this value as needed */
+  left: 0;
+  right: 0;
+  top:510px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+
+
+.slick-dots li button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.slick-dots li.slick-active button {
+  opacity: 0.75;
+}
+
+.custom-slick-dots .slick-dots li button::before {
+  font-size: 10px; /* Adjust size of default dots if needed */
+  color: white;    /* Adjust the color of the dots */
+}
+
+.custom-slick-dots .slick-dots li {
+  margin: 0 5px;
+  width: 220px; /* Ensure the list item width matches the image width */
+  height: 20px;
+}
+
+/* Ensure the img width and height are set correctly */
+.custom-slick-dots .slick-dots li img {
+  width: 100%;  /* Set the width to 100% of the li element */
+  height: 100%; /* Set the height to 100% of the li element */
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.slick-dots li.slick-active img {
+  border: 2px solid #fff;
+}
+
+.active-dot {
+  border: 2px solid #ffcc00; /* Highlight active dot with a border or any other styling */
+}
 
 /* details page*/
 
@@ -141,6 +232,16 @@
   overflow: hidden;
 
 }
+.backdrop-image-overshadow-black{
+  position: absolute;
+  top: 0;
+  width:100vw;
+  height: 100vh;
+  z-index: 0;
+  background-image: radial-gradient(rgba(255, 0, 0,0) 1%, rgba(0, 128, 0,0) 1%, black 95%);
+
+}
+
 
 
 .media-overview{

@@ -142,7 +142,7 @@ const ActorDetails = () => {
           <div style={{ margin: '0 auto', maxWidth: '800px', textAlign: 'center' }}>
             <h1 className='mb-[70px] text-start text-[#000] font-semibold'>{details.name}</h1>
           <div className='buttons flex mb-[25px] gap-[8px]'>
-              <LikeButton id={details}  type="person" className=':hover ' />
+              <LikeButton id={details}  type="person" className=':hover' color={'red'}/>
             </div>
        <h2 className='text-[25px] text-start text-[#000] font-semibold'>Overview</h2>
               <Text

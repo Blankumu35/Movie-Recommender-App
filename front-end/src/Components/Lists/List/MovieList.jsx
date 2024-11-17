@@ -8,6 +8,9 @@ import fakeImage from '../../../assets/default-movie.png'
 import { Link } from 'react-router-dom';
 import { fetchMovies, IMAGE_BASE_URL} from '../../../api/api';
 import Pagination from '../../PageChanger/Pagination'; // Ensure this is used somewhere if imported
+import LikeButton from '../../../Components/LikeButton/LikeButton';
+import Bookmark from '../../../Components/Bookmark/Bookmark';
+import Rating from '../../../Components/Rating/Rating' 
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -103,13 +106,19 @@ const MovieList = () => {
                     alt={movie.title}
                     style={{ maxWidth: '150px', height: '250px', objectFit: 'cover' }}
                   />
-                  <div className='bg-[#000000]/[0.5] rounded-b-[20px] mb-[20px]'>
-                    <div style={{ border: 'solid', borderColor: 'orange', display: 'inline-block', padding: 7, borderRadius: '16px', borderWidth: '2px' }}>
-                      <p className='text-[12px]'>{(Math.floor(movie.vote_average * 10)) / 10}</p>
-                    </div>
-                    <p style={{ fontSize: 11, marginBottom: 5 }}><Text text={`${movie.title}`} maxLine='1' /></p>
-                  </div>
                 </Link>
+                  <div className='bg-[#000000] rounded-b-[10px] mb-[20px]'>
+                      <div className='flex justify-center'>
+                      <LikeButton id={movie} type="movie" className=':hover' size={'small'} color={'red'} colorBorder={'rgba(255,255,255,0.6)'}/>
+                        <div style={{ border: 'solid', borderColor: 'orange', display: 'inline-block', padding: 7, marginBottom:7,borderRadius: '50%', borderWidth: '2px' }}>
+                          <p className='text-[12px]'>{((Math.floor(movie.vote_average * 10)) / 10)}</p>
+                        </div>
+                        <Bookmark id={movie} type="movie" className=':hover mb-[10px]' size={'medium'} color={'gold'} colorBorder={'rgba(255,255,255,0.6)'} /> 
+                        </div>   
+                        <Link to={`/movie/${movie.id}`}>     
+                        <p style={{ fontSize: 11, marginBottom: 5 }}><Text text={`${movie.title}`} maxLine='1' /></p>
+                        </Link>
+                      </div>
               </div>
             ))}
           </div>

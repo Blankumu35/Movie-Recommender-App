@@ -5,7 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import LikeButton from '../../Components/LikeButton/LikeButton';
 import Bookmark from '../../Components/Bookmark/Bookmark';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import Rating from '../../Components/Rating/Rating';
 import 'react-circular-progressbar/dist/styles.css';
 import '../../App.css';
 import fakeImage from '../../assets/default-movie.png'
@@ -152,13 +152,14 @@ const ShowDetails = () => {
         <div style={{ margin: '20px', display:'flex', flexDirection:'column' }}>
               <img src={`${IMAGE_BASE_URL}${details.backdrop_path}`} className='backdrop-image' alt={details.name} />
               <div className='backdrop-image-overshadow' />
-          <div className='media-overview items-center'>
+          <div className='media-overview items-center flex'>
                   <img
                     src={(details.poster_path)?`${IMAGE_BASE_URL}${details.poster_path}`: `${fakeImage}`}
                     alt={details.name}
+                    className=''
                     style={{ width: '300px', height: '450px', objectFit: 'cover', marginRight:10, borderRadius:8 }} 
                   />
-          <div className='media-details m-[20px]' >
+          <div className='media-details m-[20px] sm:hidden' >
                   <h1 className='mb-2 text-start text-[#000] font-semibold'>{details.name}</h1>
                   <div className='media-mini-details'>
                     <ul className='ml-5 text-[#000]'>
@@ -178,26 +179,12 @@ const ShowDetails = () => {
                     </ul>
                   </div>
                   <div className='w-20 h-20 text-[20px] mb-5'>
-                    <CircularProgressbar
-                      value={Math.floor(details.vote_average * 10)}
-                      maxValue={100}
-                      text={`${Math.floor(details.vote_average * 10)}%`}
-                      background
-                      backgroundPadding={5}
-                      styles={buildStyles({
-                        strokeLinecap: 'butt',
-                        textSize: '27px',
-                        pathTransitionDuration: 0.5,
-                        pathColor: `rgba(62, 152, 199)`,
-                        textColor: '#fff',
-                        trailColor: '#000000',
-                        backgroundColor: '#000000',
-                      })}
-                    />
+                  <Rating value={Math.floor(details.vote_average * 10)} maxValue={100} text={Math.floor(details.vote_average * 10)}  textSize='21px'
+                             pathColor='#00ff00' trailColor='#bbbfb' textColor='#fff' backgroundColor='#000000' backgroundPadding={4}  />
                   </div>
                   <div className='buttons flex mb-[25px] gap-[8px]'>
-                    <LikeButton id={details} type="show" />
-                    <Bookmark id={details} type="show" />
+                    <LikeButton id={details} type="tv"  color={'red'}/>
+                    <Bookmark id={details} type="tv"  color={'gold'}/>
                     {(trailer !== undefined) && (
                     <p className='flex gap-[5px] text-[30px] justify-center items-center cursor-pointer' onClick={() => setShowTrailer(true)}>
                       <LiaPlayCircle /> Play trailer

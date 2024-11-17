@@ -6,22 +6,18 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import axios from 'axios';
 
 
-export default function Bookmark({id, type}) {
+export default function Bookmark({id, type, size, color, colorBorder}) {
 
    const [bookmark, setBookmark] = useState(false);
-   const [size, setSize] = useState('medium');
-
-  useEffect(() => {
-    // Example condition to determine the size
-    const handleSize = window.innerWidth < 600 ? 'small' : 'medium';
-    setSize(handleSize);
-  }, []);
+  
 
 
   const userId = localStorage.getItem('ID');
 
  useEffect(() => {
     const fetchBookmarkItems = async () => {
+          //console.log(userId,id,type);
+
       if (userId) {
         const response = await axios.post(`http://localhost:5000/is-liked`,
         {
@@ -30,7 +26,7 @@ export default function Bookmark({id, type}) {
           itemType: type,
           like: false
         });
-        // console.log(response.data.isLiked)
+         console.log(response.data.isLiked)
         if(response.data.isLiked === true ){
         setBookmark(true);
         }else{
@@ -70,6 +66,8 @@ export default function Bookmark({id, type}) {
         });
       }
       
+                  console.log(isChecked)
+
       // Update the state after the request completes
       setBookmark(isChecked);
       console.log(bookmark)
@@ -85,9 +83,9 @@ export default function Bookmark({id, type}) {
       <Checkbox
         checked={bookmark}
         onChange={handleBookmarkChange}
-        icon={<BookmarkBorderIcon />}
-        checkedIcon={<BookmarkIcon />}
-        size='large'
+        icon={<BookmarkBorderIcon style={{color: colorBorder || ''}} />}
+        checkedIcon={<BookmarkIcon style={{color:color || ''}}/>}
+        size={size || 'large'}
 
       />
     </div>

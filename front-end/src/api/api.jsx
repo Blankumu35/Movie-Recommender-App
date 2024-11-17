@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useState } from 'react';
 
 const API_KEY = import.meta.env.VITE_API_KEY; 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -78,3 +79,25 @@ export const searchItems = async (query) => {
 
   return searchData;
 };
+
+export const fetchDetails = async (id) => {
+      try {
+        const response = await axios.get(`${BASE_URL}/movie/${id}`, {
+          params: {
+            api_key: API_KEY,
+            language: 'en-US'
+          }
+        });
+        console.log(response.data)
+        setDetails(response.data);
+      } catch (error) {
+        console.error('Error fetching details:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+
+
+
+

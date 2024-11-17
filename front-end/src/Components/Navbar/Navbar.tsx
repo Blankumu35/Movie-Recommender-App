@@ -2,7 +2,7 @@ import './Navbar.css';
 import { FaHome, FaUser } from 'react-icons/fa';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 import { FiFilm } from 'react-icons/fi';
-import { BiLike, BiShow } from 'react-icons/bi';
+import { BiBookmark, BiLike, BiShow } from 'react-icons/bi';
 import { BsList } from 'react-icons/bs';
 import React, { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
@@ -13,8 +13,9 @@ import ProfilePicture from '../ProfilePic/ProfilePicture';
 import { doc, getDoc } from 'firebase/firestore';
 import { SearchComponent } from '../SearchBar/SearchBar';
 import axios from 'axios';
+import { searchItems } from '../../api/api';
 
-const Navbar = () => {
+const Navbar = ({searchQueryInternal, handleInputChange}) => {
   const [user] = useAuthState(auth); // Firebase user
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profile, setProfile] = useState(null);
@@ -42,6 +43,8 @@ const Navbar = () => {
 
   const toggleSearch = () => {
     setSearchVisible(!searchVisible);
+        console.log(!searchVisible)
+
   };
 
   // Fetch userId from localStorage when the component mounts
@@ -53,6 +56,7 @@ const Navbar = () => {
     } else {
       console.log('No User ID found in localStorage');
     }
+    console.log(searchVisible)
   }, []);
 
   // Fetch user data when userId is available
@@ -106,7 +110,7 @@ const Navbar = () => {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     try {
-      const searchData = await searchItems(searchQuery);
+      const searchData = await searchItems(searchQueryInternal);
       setResults(searchData.results);
       setTotalPages(searchData.total_pages);
       setCurrentPage(1);
@@ -115,6 +119,7 @@ const Navbar = () => {
       setError('Failed to search items.');
     }
   };
+
 
   return (
     <>
@@ -130,8 +135,8 @@ const Navbar = () => {
         <div className='search-bar' style={{ display: 'flex' }}>
           <div className='hidden md:flex lg:flex'>
             <SearchComponent
-              searchQuery={searchQuery}
-              handleSearchChange={handleSearchChange}
+              searchQuery={searchQueryInternal}
+              handleSearchChange={handleInputChange}
               handleSearchSubmit={handleSearchSubmit}
             />
           </div>
@@ -150,7 +155,7 @@ const Navbar = () => {
                 <div className='dropdown-menu pointer-events-none bg-[grey] shadow-lg z-10 p-4 text-center border-black-50 rounded-lg items-center justify-center'>
                   <div className='dropdown-header flex-row justify-center items-center'>
                     {user && user.providerData[0].providerId === 'google.com' ? (
-                      <img src={user.photoURL} className='rounded-full flex items-center justify-center w-9 h-9' alt='Profile' />
+                      <img src={user.photoURL} className='rounded-full flex items-center justify-center w-9 h-9 ml-[4.5rem] mb-2' alt='Profile' />
                     ) : (
                       <ProfilePicture firstName={firstName} lastName={lastName} color={color} />
                     )}
@@ -158,7 +163,7 @@ const Navbar = () => {
                     <p>{user ? user.email : email}</p>
                   </div>
                   <div className='dropdown-links'>
-                    <Link className='pointer-events-auto' to='/likedItems'><BiLike /> Likes</Link>
+                    <Link className='pointer-events-auto' to='/likedItems'> Likes</Link>
                     <button className='pointer-events-auto' onClick={logout}>Logout</button>
                   </div>
                 </div>
@@ -177,6 +182,9 @@ const Navbar = () => {
               <Link to='/' onClick={toggleMenu}>
                 <FaHome /> Home
               </Link>
+               <Link to='/forYou' onClick={toggleMenu}>
+                <BiShow /> For You
+              </Link>
               <Link to='/movies' onClick={toggleMenu}>
                 <FiFilm /> Movies
               </Link>
@@ -184,7 +192,7 @@ const Navbar = () => {
                 <BiShow /> TV Shows
               </Link>
               <Link to='/watchlist' onClick={toggleMenu}>
-                <BiLike /> WatchList
+                <BiBookmark /> WatchList
               </Link>
             </div>
           </div>
@@ -196,8 +204,8 @@ const Navbar = () => {
           <div className='search-overlay flex md:hidden lg:hidden' onClick={toggleSearch} />
           <div className='search-input-container flex md:hidden lg:hidden'>
             <SearchComponent
-              searchQuery={searchQuery}
-              handleSearchChange={handleSearchChange}
+              searchQuery={searchQueryInternal}
+              handleSearchChange={handleInputChange}
               handleSearchSubmit={handleSearchSubmit}
             />
           </div>

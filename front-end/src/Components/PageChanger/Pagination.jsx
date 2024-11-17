@@ -10,8 +10,25 @@ const CustomPagination = ({ currentPage, totalPages, handlePageChange }) => {
         page={currentPage} 
         onChange={(event, value) => handlePageChange(value)} 
         size='large'
-        color="primary" 
         variant="outlined"
+        sx={{
+          '.MuiPaginationItem-root': {
+            color: 'white',        // Text color
+            borderColor: 'white',  // Border color for outlined variant
+          },
+          '.MuiPaginationItem-root.Mui-selected': {
+            backgroundColor: 'white',  // Background color for selected page
+            color: 'black',            // Text color for selected page
+          },
+          '.MuiPaginationItem-root: hover:not(.MuiPaginationItem-root.Mui-selected)': {
+            color: 'black',       
+            backgroundColor: 'rgba(255,255,255,0.5)', 
+            borderColor: 'white',  
+          },
+          '.MuiPaginationItem-ellipsis': {
+            color: 'white',  
+          }
+        }}
       />
     </Stack>
   );

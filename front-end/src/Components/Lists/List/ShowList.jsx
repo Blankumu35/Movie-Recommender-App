@@ -5,7 +5,9 @@ import Pagination from '../../PageChanger/Pagination'; // Ensure this is used so
 import Text from 'react-lines-ellipsis';
 import { Icon } from '@iconify/react';
 import fakeImage from '../../../assets/default-movie.png'
-
+import LikeButton from '../../../Components/LikeButton/LikeButton';
+import Bookmark from '../../../Components/Bookmark/Bookmark';
+import Rating from '../../../Components/Rating/Rating' 
 
 
 const ShowList = () => {
@@ -16,7 +18,7 @@ const ShowList = () => {
   const [error, setError] = useState('');
   const [options, setOptions] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState('');
-      const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [title, setTitle] = useState('Popular TV Shows');
 
   useEffect(() => {
@@ -97,15 +99,21 @@ const ShowList = () => {
                   <img
                     src={(show.poster_path)?`${IMAGE_BASE_URL}${show.poster_path}`: `${fakeImage}`}
                     alt={show.title}
-                    style={{ maxWidth: '150px', height: '250px', objectFit: 'cover' }}
+                    style={{width:'100%', maxWidth: '150px', height: '250px', objectFit: 'cover' }}
                   />
-                  <div className='bg-[#000000]/[0.5] rounded-b-[20px] mb-[20px]'>
-                    <div style={{ border: 'solid', borderColor: 'orange', display: 'inline-block', padding: 7, borderRadius: '16px', borderWidth: '2px' }}>
-                      <p className='text-[12px]'>{(Math.floor(show.vote_average * 10)) / 10}</p>
-                    </div>
-                    <p style={{ fontSize: 11, marginBottom: 5 }}><Text text={`${show.name}`} maxLine='1' /></p>
-                  </div>
                 </Link>
+                   <div className='bg-[#000000] rounded-b-[10px] mb-[20px]'>
+                      <div className='flex justify-center'>
+                      <LikeButton id={show} type="tv" className=':hover' size={'small'} color={'red'} colorBorder={'rgba(255,255,255,0.6)'}/>
+                        <div style={{ border: 'solid', borderColor: 'orange', display: 'inline-block', padding: 7, marginBottom:7,borderRadius: '50%', borderWidth: '2px' }}>
+                          <p className='text-[12px]'>{((Math.floor(show.vote_average * 10)) / 10)}</p>
+                        </div>
+                        <Bookmark id={show} type="tv" className=':hover mb-[10px]' size={'medium'} color={'gold'} colorBorder={'rgba(255,255,255,0.6)'} /> 
+                        </div>   
+                        <Link to={`/tv/${show.id}`}>     
+                        <p style={{ fontSize: 11, marginBottom: 5 }}><Text text={`${show.name}`} maxLine='1' /></p>
+                        </Link>
+                      </div>
               </div>
             ))}
           </div>
