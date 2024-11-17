@@ -1,5 +1,7 @@
 Tech Used: React, Javascript, Vite, React Carousel, Node.js, Express.js, MongoDB, Firebase,Python
 
+The version thats deployed in vercel isn't connected to the backend, therefore signing in or liking items isn't possible.
+
 I want to deploy this app using AWS-EC2 but I need to dockerise the app. I also need to complete the final part of this project, which is to show a list of recommended movies/tv shows based on what the user liked. I need to collect data of all movies/tv shows
 from TMDB and this will take some time, since I can't just download a file with all the movies/tv shows.
 
